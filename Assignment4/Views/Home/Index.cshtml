@@ -2,7 +2,143 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@model IEnumerable<Assignment4.Models.Company>
+
+<h2>Symbols</h2>
+<hr />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                symbol
+            </th>
+            <th>
+                companyName
+            </th>
+            <th>
+                exchange
+            </th>
+            <th>
+                industry
+            </th>
+            <th>
+                website
+            </th>
+            @*
+        <th>
+            operatingIncome
+        </th>
+        <th>
+            netIncome
+        </th>
+        <th>
+            researchAndDevelopment
+        </th>
+        <th>
+            operatingExpense
+        </th>
+        <th>
+            currentAssets
+        </th>
+        <th>
+            totalAssets
+        </th>
+        <th>
+            totalLiabilities
+        </th>
+        <th>
+            currentCash
+        </th>
+        <th>
+            currentDebt
+        </th>
+        <th>
+            totalCash
+        <th>
+            totalDebt
+        </th>
+        <th>
+            shareholderEquity
+        </th>
+        <th>
+            cashChange
+        </th>
+        <th>
+            cashFlow
+        </th>
+        <th>
+            operatingGainsLosses
+        </th>*@
+        </tr>
+    </thead>
+
+    <tbody>
+        
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.symbol)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.companyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.industry)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.exchange)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.website)
+            </td>
+            @*<td>
+            @Html.DisplayFor(modelItem => item.operatingIncome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.netIncome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.researchAndDevelopment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.operatingExpense)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.currentAssets)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.totalAssets)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.totalLiabilities)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.currentCash)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.currentDebt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.totalCash)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.totalDebt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.shareholderEquity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cashChange)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cashFlow)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.operatingGainsLosses)
+        </td>>*@
+        </tr>
+        }
+    </tbody>
+</table>
