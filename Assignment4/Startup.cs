@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using Assignment4.DataAccess;
 
 namespace Assignment4
 {
@@ -32,6 +34,10 @@ namespace Assignment4
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            // Setup EF connection - modify the Conguration string
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["Data:Assignment4_db:ConnectionString"]));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

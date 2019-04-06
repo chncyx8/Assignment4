@@ -2,7 +2,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-@model IEnumerable<Assignment4.Models.Company>
+@model IEnumerable<Assignment4.Models.EF_model.Company>
 
 <h2>Symbols</h2>
 <hr />
@@ -11,12 +11,12 @@
     <thead>
         <tr>
             <th>
-                symbol
+                Symbol
             </th>
             <th>
-                companyName
+                Company Name
             </th>
-            <th>
+            @*<th>
                 exchange
             </th>
             <th>
@@ -24,7 +24,7 @@
             </th>
             <th>
                 website
-            </th>
+            </th>*@
             @*
         <th>
             operatingIncome
@@ -82,17 +82,17 @@
                 @Html.DisplayFor(modelItem => item.symbol)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.companyName)
+                @Html.DisplayFor(modelItem => item.name)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.industry)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.exchange)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.website)
-            </td>
+            @*<td>
+            @Html.DisplayFor(modelItem => item.industry)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.exchange)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.website)
+        </td>*@
             @*<td>
             @Html.DisplayFor(modelItem => item.operatingIncome)
         </td>
