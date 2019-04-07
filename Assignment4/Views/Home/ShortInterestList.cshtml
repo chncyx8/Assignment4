@@ -1,0 +1,67 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model IEnumerable<Assignment4.Models.EF_model.ShortInterestList>
+
+<h2>Symbols</h2>
+<hr />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                nameSettlementDate
+            </th>
+            <th>
+                SecurityName
+            </th>
+            <th>
+                CurrentShortInterest
+            </th>
+            <th>
+                PreviousShortInterest
+            </th>
+            <th>
+                PercentChange
+            </th>
+            <th>
+                AverageDailyVolume
+            </th>
+            <th>
+                DaystoCover
+            </th>
+
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nameSettlementDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SecurityName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrentShortInterest)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PreviousShortInterest)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PercentChange)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AverageDailyVolume)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DaystoCover)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

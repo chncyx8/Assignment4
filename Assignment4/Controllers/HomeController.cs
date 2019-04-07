@@ -59,6 +59,41 @@ namespace API_Simple.Controllers
             return companies;
         }
 
+        public List<ShortInterestList> GetShortInterestList(string symbol)
+        {
+
+            string IEXTrading_API_PATH = BASE_URL + "/stock/" + symbol + "/short-interest";
+            string SITList = "";
+            List<ShortInterestList> SIT = new List<ShortInterestList>();
+            httpClient.BaseAddress = new Uri(IEXTrading_API_PATH);
+
+            HttpResponseMessage respose = httpClient.GetAsync(IEXTrading_API_PATH).GetAwaiter().GetResult();
+
+            if (respose.IsSuccessStatusCode)
+            {
+                SITList = respose.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            }
+            if (!SITList.Equals(""))
+            {
+                SIT = JsonConvert.DeserializeObject<List<ShortInterestList>>(SITList);
+                SIT.GetRange(0, SIT.Count);
+            }
+            return SIT;
+        }
+        [Route("{id}")]
+        public IActionResult shortInterestList(string id)
+        {
+            String symbols = id;
+            //Set ViewBag variable first
+            ViewBag.dbSuccessComp = 0;
+            List<ShortInterestList> shortInterestList = GetShortInterestList(symbols);
+
+            //Save companies in TempData, so they do not have to be retrieved again
+            TempData["shortInterestList"] = JsonConvert.SerializeObject(shortInterestList);
+            //Console.WriteLine(divident);
+            return View(shortInterestList);
+        }
+
         public List<Financials> GetFinancials(string symbol)
         {
             string IEXTrading_API_Financials = BASE_URL + "/stock/{symbol}/financials";

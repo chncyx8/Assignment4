@@ -15,61 +15,11 @@
             </th>
             <th>
                 Company Name
-            </th>
+            </th>           
             <th>
-                Total Revenue
+                ShortInterestList
             </th>
-            <th>
-                Report Date
-            </th>
-            @*<th>
-                    website
-                </th>*@
-            @*
-                <th>
-                    operatingIncome
-                </th>
-                <th>
-                    netIncome
-                </th>
-                <th>
-                    researchAndDevelopment
-                </th>
-                <th>
-                    operatingExpense
-                </th>
-                <th>
-                    currentAssets
-                </th>
-                <th>
-                    totalAssets
-                </th>
-                <th>
-                    totalLiabilities
-                </th>
-                <th>
-                    currentCash
-                </th>
-                <th>
-                    currentDebt
-                </th>
-                <th>
-                    totalCash
-                <th>
-                    totalDebt
-                </th>
-                <th>
-                    shareholderEquity
-                </th>
-                <th>
-                    cashChange
-                </th>
-                <th>
-                    cashFlow
-                </th>
-                <th>
-                    operatingGainsLosses
-                </th>*@
+           
         </tr>
     </thead>
 
@@ -77,68 +27,20 @@
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.symbol)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.name)
-                </td>
-                @*<td>
-                    @Html.DisplayFor(modelItem => item.totalRevenue)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.reportDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.website)
-                </td>*@
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.operatingIncome)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.netIncome)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.researchAndDevelopment)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.operatingExpense)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.currentAssets)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.totalAssets)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.totalLiabilities)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.currentCash)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.currentDebt)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.totalCash)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.totalDebt)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.shareholderEquity)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.cashChange)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.cashFlow)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.operatingGainsLosses)
-                    </td>>*@
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.symbol)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                <a asp-controller="Home" asp-route-id="@item.symbol" asp-action="ShortInterestList">ShortInterestList</a>
+            </td>        
+        </tr>
         }
     </tbody>
 </table>
+
+
+
