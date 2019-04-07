@@ -59,10 +59,38 @@ namespace API_Simple.Controllers
             return companies;
         }
 
+        public IActionResult Index()
+        {
+            //Set ViewBag variable first
+            ViewBag.dbSuccessComp = 0;
+            List<Company> companies = GetSymbols();
+
+            //Save companies in TempData, so they do not have to be retrieved again
+            TempData["Companies"] = JsonConvert.SerializeObject(companies);
+
+            return View(companies);
+        }
+
+        /*
+            The Symbols action calls the GetSymbols method that returns a list of Companies.
+            This list of Companies is passed to the Symbols View.
+        */
+        public IActionResult Symbols()
+        {
+            //Set ViewBag variable first
+            ViewBag.dbSuccessComp = 0;
+            List<Company> companies = GetSymbols();
+
+            //Save companies in TempData, so they do not have to be retrieved again
+            TempData["Companies"] = JsonConvert.SerializeObject(companies);
+
+            return View(companies);
+        }
+
         public List<ShortInterestList> GetShortInterestList(string symbol)
         {
 
-            string IEXTrading_API_PATH = BASE_URL + "/stock/" + symbol + "/short-interest";
+            string IEXTrading_API_PATH = BASE_URL + "/stock/" + symbol + "short-interest";
             string SITList = "";
             List<ShortInterestList> SIT = new List<ShortInterestList>();
             httpClient.BaseAddress = new Uri(IEXTrading_API_PATH);
@@ -86,12 +114,12 @@ namespace API_Simple.Controllers
             String symbols = id;
             //Set ViewBag variable first
             ViewBag.dbSuccessComp = 0;
-            List<ShortInterestList> shortInterestList = GetShortInterestList(symbols);
+            List<ShortInterestList> shortInterestLists = GetShortInterestList(symbols);
 
             //Save companies in TempData, so they do not have to be retrieved again
-            TempData["shortInterestList"] = JsonConvert.SerializeObject(shortInterestList);
+            TempData["shortInterestList"] = JsonConvert.SerializeObject(shortInterestLists);
             //Console.WriteLine(divident);
-            return View(shortInterestList);
+            return View(shortInterestLists);
         }
 
         public List<Financials> GetFinancials(string symbol)
@@ -121,14 +149,7 @@ namespace API_Simple.Controllers
         }
 
 
-        public IActionResult Index()
-        {
-            // Get the data from the List using GetSymbols method
-            List<Company> companies = GetSymbols();
-            TempData["Companies"] = JsonConvert.SerializeObject(companies);
-            // Send the data to the Index view
-            return View(companies);
-        }
+       
 
         public IActionResult Financials()
         {
