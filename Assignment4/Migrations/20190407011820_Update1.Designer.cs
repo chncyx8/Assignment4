@@ -3,14 +3,16 @@ using Assignment4.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Assignment4.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190407011820_Update1")]
+    partial class Update1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,7 +31,9 @@ namespace Assignment4.Migrations
 
                     b.HasKey("symbol");
 
-                    b.HasIndex("name");
+                    b.HasIndex("name")
+                        .IsUnique()
+                        .HasFilter("[name] IS NOT NULL");
 
                     b.ToTable("Companies");
                 });
@@ -56,9 +60,9 @@ namespace Assignment4.Migrations
 
             modelBuilder.Entity("Assignment4.Models.EF_model+Company", b =>
                 {
-                    b.HasOne("Assignment4.Models.EF_model+Financials", "Financials")
-                        .WithMany()
-                        .HasForeignKey("name");
+                    b.HasOne("Assignment4.Models.EF_model+Financials")
+                        .WithOne("Company")
+                        .HasForeignKey("Assignment4.Models.EF_model+Company", "name");
                 });
 #pragma warning restore 612, 618
         }

@@ -31,6 +31,22 @@ namespace Assignment4.Models
             public int cashFlow { get; set; }
             public string operatingGainsLosses { get; set; } */
 
+            public virtual Financials Financials { get; set; }
+
+        }
+
+        public class Financials
+        {
+            [Key]
+            public string name { get; set; }
+            [DataType(DataType.Date)]
+            [DisplayFormat(DataFormatString = "{0:MM-dd-yyyy}", ApplyFormatInEditMode = true)]
+            public string reportDate { get; set; }
+            public int grossProfit { get; set; }
+            public int costOfRevenue { get; set; }
+            public int operatingRevenue { get; set; }
+            public int totalRevenue { get; set; }
+
         }
     }
 }

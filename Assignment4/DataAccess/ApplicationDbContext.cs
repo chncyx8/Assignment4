@@ -12,5 +12,7 @@ namespace Assignment4.DataAccess
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         public DbSet<Company> Companies { get; set; }
+
+        public DbSet<Financials> Financials { get; set; }
     }
 }
