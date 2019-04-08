@@ -227,7 +227,7 @@ namespace API_Simple.Controllers
         public IActionResult PopulateSymbols()
         {
             // Retrieve the companies that were saved in the symbols method
-            String data = HttpContext.Session.GetString("companies");
+            //String data = HttpContext.Session.GetType("companies");
             List<Company> companies = JsonConvert.DeserializeObject<List<Company>>(TempData["Companies"].ToString());
 
             foreach (Company company in companies)
@@ -245,7 +245,6 @@ namespace API_Simple.Controllers
             return View("Index", companies);
         }
 
-        }
 
         
 
