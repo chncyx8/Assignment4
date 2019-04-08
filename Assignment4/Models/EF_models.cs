@@ -13,35 +13,55 @@ namespace Assignment4.Models
             [Key]
             public string symbol { get; set; }
             public string name { get; set; }
-            
-            public virtual Financials Financials { get; set; }
 
         }
 
         public class ShortInterestList
         {
             [Key]
-            public DateTime nameSettlementDate { get; set; }           
+            public DateTime SettlementDate { get; set; }           
             public string SecurityName { get; set; }
             public int CurrentShortInterest { get; set; }
             public int PreviousShortInterest { get; set; }
             public double PercentChange { get; set; }
             public int AverageDailyVolume { get; set; }
             public double DaystoCover { get; set; }
+            public string StockAdjustmentFlag { get; set; }
+            public string RevisionFlag { get; set; }
+            public string SymbolinINETSymbology { get; set; }
+            public string SymbolinCQSSymbology { get; set; }
+            public string SymbolinCMSSymbology { get; set; }
+            public string NewIssueFlag { get; set; }
+            public string CompanyName { get; set; }
         }
 
-        public class Financials
+        public class Book
         {
             [Key]
-            public string name { get; set; }
-            [DataType(DataType.Date)]
-            [DisplayFormat(DataFormatString = "{0:MM-dd-yyyy}", ApplyFormatInEditMode = true)]
-            public string reportDate { get; set; }
-            public int grossProfit { get; set; }
-            public int costOfRevenue { get; set; }
-            public int operatingRevenue { get; set; }
-            public int totalRevenue { get; set; }
+            public float quote { get; set; }
+            public float bids { get; set; }
+            public float asks { get; set; }
+            public float trades { get; set; }
+            public float systemEvent { get; set; }
 
+        }
+
+        public class Dividend
+        {
+            [Key]
+            public DateTime Exdate { get; set; }
+            public DateTime Payment_date { get; set; }
+            public DateTime Record_date { get; set; }
+            public float? Amount { get; set; }
+            public string type { get; set; }
+            public string qualified { get; set; }
+        }
+
+        public class Price
+        {
+            [Key]
+            public double Amount { get; set; }
+            public string Symbol { get; set; }
         }
     }
 }

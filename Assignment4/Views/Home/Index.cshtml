@@ -15,14 +15,20 @@
             </th>
             <th>
                 Company Name
-            </th>  
-            <th>
-                Financials
             </th>
             <th>
                 ShortInterestList
             </th>
-           
+            <th>
+                Book
+            </th>
+            <th>
+                Dividend
+            </th>
+            <th>
+                Price
+            </th>
+
         </tr>
     </thead>
 
@@ -38,10 +44,16 @@
                 @Html.DisplayFor(modelItem => item.name)
             </td>
             <td>
-                <a asp-controller="Home" asp-route-id="@item.symbol" asp-action="Financials">Financials</a>
+                <a asp-controller="Home" asp-route-id="@item.symbol" asp-action="ShortInterestList">ShortInterestList</a>
             </td>
             <td>
-                <a asp-controller="Home" asp-route-id="@item.symbol" asp-action="ShortInterestList">ShortInterestList</a>
+                <a asp-controller="Home" asp-route-id="@item.symbol" asp-action="Book">Book</a>
+            </td>
+            <td>
+                <a asp-controller="Home" asp-route-id="@item.symbol" asp-action="Dividend">Dividend</a>
+            </td>
+            <td>
+                <a asp-controller="Home" asp-route-id="@item.symbol" asp-action="Price">Price</a>
             </td>
         </tr>
         }

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Assignment4.Models.EF_model.Book>
+
+@{
+    ViewData["Title"] = "Book";
+}
+
+<h2>Book</h2>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.quote)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.bids)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.asks)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.trades)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.systemEvent)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.quote)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.bids)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.asks)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.trades)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.systemEvent)
+                </td>
+
+                <td></td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -19,6 +19,7 @@ namespace API_Simple.Controllers
         string BASE_URL = "https://api.iextrading.com/1.0/";
         HttpClient httpClient;
 
+
         public HomeController(ApplicationDbContext context)
         {
             dbContext = context;
@@ -90,7 +91,7 @@ namespace API_Simple.Controllers
         public List<ShortInterestList> GetShortInterestList(string symbol)
         {
 
-            string IEXTrading_API_PATH = BASE_URL + "/stock/" + symbol + "short-interest";
+            string IEXTrading_API_PATH = BASE_URL + "stock/" + symbol + "short-interest";
             string SITList = "";
             List<ShortInterestList> SIT = new List<ShortInterestList>();
             httpClient.BaseAddress = new Uri(IEXTrading_API_PATH);
@@ -122,41 +123,105 @@ namespace API_Simple.Controllers
             return View(shortInterestLists);
         }
 
-        public List<Financials> GetFinancials(string symbol)
+        public List<Book> GetBook(string symbol)
         {
-            string IEXTrading_API_Financials = BASE_URL + "/stock/" + symbol + "/financials";
-            string financialList = "";
-            List<Financials> financials = null;
 
-            // Connect to the IEXTrading API and retrieve information
-            httpClient.BaseAddress = new Uri(IEXTrading_API_Financials);
-            HttpResponseMessage response = httpClient.GetAsync(IEXTrading_API_Financials).GetAwaiter().GetResult();
+            string IEXTrading_API_PATH = BASE_URL + "stock/" + symbol + "book";
+            string BKlist = "";
+            List<Book> bk = new List<Book>();
+            httpClient.BaseAddress = new Uri(IEXTrading_API_PATH);
 
-            // Read the Json objects in the API response
-            if (response.IsSuccessStatusCode)
+            HttpResponseMessage respose = httpClient.GetAsync(IEXTrading_API_PATH).GetAwaiter().GetResult();
+
+            if (respose.IsSuccessStatusCode)
             {
-                financialList = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                BKlist = respose.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             }
-
-            // Parse the Json strings as C# objects
-            if (!financialList.Equals(""))
+            if (!BKlist.Equals(""))
             {
-                financials = JsonConvert.DeserializeObject<List<Financials>>(financialList);
-                financials = financials.GetRange(0, financials.Count);
+                bk = JsonConvert.DeserializeObject<List<Book>>(BKlist);
+                bk.GetRange(0, bk.Count);
             }
-
-            return financials;
+            return bk;
         }
 
-        //[Route("{symbol}")]
-        public IActionResult Financials(string id)
+        public IActionResult Book(string id)
         {
-            // Get the data from the List using GetSymbols method
+            String symbols = id;
+            //Set ViewBag variable first
             ViewBag.dbSuccessComp = 0;
-            List<Financials> financials = GetFinancials(id);
-            TempData["Financials"] = JsonConvert.SerializeObject(financials);
-            // Send the data to the Index view
-            return View(financials);
+            List<Book> booklist = GetBook(symbols);
+
+            //Save companies in TempData, so they do not have to be retrieved again
+            TempData["BookList"] = JsonConvert.SerializeObject(booklist);
+            //Console.WriteLine(divident);
+            return View(booklist);
+        }
+
+        public List<Dividend> GetDividend(string symbol)
+        {
+
+            string IEXTrading_API_Dividend = BASE_URL + "stock/" + symbol + "/dividends/2y";
+            string dividendList = "";
+            List<Dividend> dividends = new List<Dividend>();
+            httpClient.BaseAddress = new Uri(IEXTrading_API_Dividend);
+
+            HttpResponseMessage respose = httpClient.GetAsync(IEXTrading_API_Dividend).GetAwaiter().GetResult();
+
+            if (respose.IsSuccessStatusCode)
+            {
+                dividendList = respose.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            }
+            if (!dividendList.Equals(""))
+            {
+                dividends = JsonConvert.DeserializeObject<List<Dividend>>(dividendList);
+                dividends.GetRange(0, dividends.Count);
+            }
+            return dividends;
+        }
+        //[Route("{id}")]
+        public IActionResult Dividend(string id)
+        {
+            String symbols = id;
+            //Set ViewBag variable first
+            ViewBag.dbSuccessComp = 0;
+            List<Dividend> dividend = GetDividend(symbols);
+
+            //Save companies in TempData, so they do not have to be retrieved again
+            TempData["dividend"] = JsonConvert.SerializeObject(dividend);
+            return View(dividend);
+        }
+
+        public double GetPrice(string symbol)
+        {
+
+            string IEXTrading_API_Price = BASE_URL + "/stock/" + symbol + "/price";
+            double price = 0;
+            // List<Price> prices = new List<Price>();
+            httpClient.BaseAddress = new Uri(IEXTrading_API_Price);
+
+            HttpResponseMessage respose = httpClient.GetAsync(IEXTrading_API_Price).GetAwaiter().GetResult();
+
+            if (respose.IsSuccessStatusCode)
+            {
+                price = Convert.ToDouble(respose.Content.ReadAsStringAsync().GetAwaiter().GetResult());
+            }
+
+            return price;
+        }
+
+
+        public IActionResult Price(string id)
+        {
+            String symbols = id;
+            //Set ViewBag variable first
+            ViewBag.dbSuccessComp = 0;
+            double Price = GetPrice(symbols);
+
+            //Save companies in TempData, so they do not have to be retrieved again
+            TempData["Price"] = JsonConvert.SerializeObject(Price);
+            ViewBag.Message = Price;
+            return View(Price);
         }
 
         public IActionResult PopulateSymbols()
@@ -175,7 +240,7 @@ namespace API_Simple.Controllers
             }
 
             dbContext.SaveChanges();
-            //ViewBag.dbSuccessComp = 1;
+            ViewBag.dbSuccessComp = 1;
             return View("Index", companies);
         }
 

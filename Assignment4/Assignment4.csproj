@@ -7,8 +7,28 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190406084947_InitialCreate.cs" />
+    <Compile Remove="Migrations\20190406084947_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20190407011820_Update1.cs" />
+    <Compile Remove="Migrations\20190407011820_Update1.Designer.cs" />
+    <Compile Remove="Migrations\20190407013242_Update2.cs" />
+    <Compile Remove="Migrations\20190407013242_Update2.Designer.cs" />
     <Compile Remove="Migrations\20190407215305_Update3.cs" />
     <Compile Remove="Migrations\20190407215305_Update3.Designer.cs" />
+    <Compile Remove="Migrations\20190407235539_Update4.cs" />
+    <Compile Remove="Migrations\20190407235539_Update4.Designer.cs" />
+    <Compile Remove="Migrations\20190408000323_Update3.cs" />
+    <Compile Remove="Migrations\20190408000323_Update3.Designer.cs" />
+    <Compile Remove="Migrations\20190408012732_InitialCreate.cs" />
+    <Compile Remove="Migrations\20190408012732_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20190408013007_InitialCreate.cs" />
+    <Compile Remove="Migrations\20190408013007_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20190408013129_InitialCreate.cs" />
+    <Compile Remove="Migrations\20190408013129_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20190408014622_InitialCreate.cs" />
+    <Compile Remove="Migrations\20190408014622_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20190408020914_InitialCreate.cs" />
+    <Compile Remove="Migrations\20190408020914_InitialCreate.Designer.cs" />
   </ItemGroup>
 
 
