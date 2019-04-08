@@ -6,6 +6,11 @@
     <UserSecretsId>747815dc-1c66-4176-b7d9-766efea361f6</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Migrations\20190407215305_Update3.cs" />
+    <Compile Remove="Migrations\20190407215305_Update3.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />

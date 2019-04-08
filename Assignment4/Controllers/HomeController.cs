@@ -124,8 +124,8 @@ namespace API_Simple.Controllers
 
         public List<Financials> GetFinancials(string symbol)
         {
-            string IEXTrading_API_Financials = BASE_URL + "/stock/{symbol}/financials";
-            string totalRevenue = "";
+            string IEXTrading_API_Financials = BASE_URL + "/stock/" + symbol + "/financials";
+            string financialList = "";
             List<Financials> financials = null;
 
             // Connect to the IEXTrading API and retrieve information
@@ -135,26 +135,25 @@ namespace API_Simple.Controllers
             // Read the Json objects in the API response
             if (response.IsSuccessStatusCode)
             {
-                totalRevenue = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                financialList = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             }
 
             // Parse the Json strings as C# objects
-            if (!totalRevenue.Equals(""))
+            if (!financialList.Equals(""))
             {
-                financials = JsonConvert.DeserializeObject<List<Financials>>(totalRevenue);
-                financials = financials.GetRange(0, 50);
+                financials = JsonConvert.DeserializeObject<List<Financials>>(financialList);
+                financials = financials.GetRange(0, financials.Count);
             }
 
             return financials;
         }
 
-
-       
-
-        public IActionResult Financials()
+        //[Route("{symbol}")]
+        public IActionResult Financials(string id)
         {
             // Get the data from the List using GetSymbols method
-            List<Financials> financials = GetFinancials("AAPL");
+            ViewBag.dbSuccessComp = 0;
+            List<Financials> financials = GetFinancials(id);
             TempData["Financials"] = JsonConvert.SerializeObject(financials);
             // Send the data to the Index view
             return View(financials);
@@ -180,7 +179,7 @@ namespace API_Simple.Controllers
             return View("Index", companies);
         }
 
-        public IActionResult PopulateFinancials()
+        /*public IActionResult PopulateFinancials()
         {
             // Retrieve the companies that were saved in the symbols method
             List<Financials> financials = JsonConvert.DeserializeObject<List<Financials>>(TempData["Financials"].ToString());
@@ -189,7 +188,7 @@ namespace API_Simple.Controllers
             {
                 //Database will give PK constraint violation error when trying to insert record with existing PK.
                 //So add company only if it doesnt exist, check existence using symbol (PK)
-                if (dbContext.Financials.Where(c => c.totalRevenue.Equals(financial.totalRevenue)).Count() == 0)
+                if (dbContext.Financials.Where(c => c.financialList.Equals(financial.financialList)).Count() == 0)
                 {
                     dbContext.Financials.Add(financial);
                 }
@@ -200,8 +199,34 @@ namespace API_Simple.Controllers
             return View("Financials", financials);
         }
 
+        public IActionResult PopulateSIT()
+        {
+            // Retrieve the companies that were saved in the symbols method
+            List<ShortInterestList> shortInterestLists = JsonConvert.DeserializeObject<List<ShortInterestList>>(TempData["shortInterestList"].ToString());
+
+            foreach (ShortInterestList sit in SIT)
+            {
+                //Database will give PK constraint violation error when trying to insert record with existing PK.
+                //So add company only if it doesnt exist, check existence using symbol (PK)
+                if (dbContext.ShortInterestList.Where(c => c.totalRevenue.Equals(sit.ShortInterestList)).Count() == 0)
+                {
+                    dbContext.ShortInterestList.Add(sit);
+                }
+            }
+
+            dbContext.SaveChanges();
+            //ViewBag.dbSuccessComp = 1;
+            return View("Financials", financials);
+        }*/
+
         public IActionResult Privacy()
         {
+            return View();
+        }
+
+        public IActionResult AboutUs()
+        {
+            //ViewBag.Link = "<a href='" + github.com / chncyx8 / Assignment4 + "'>Github</a>";
             return View();
         }
 

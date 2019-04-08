@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment4.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190407215305_Update3")]
+    [Migration("20190408000323_Update3")]
     partial class Update3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
