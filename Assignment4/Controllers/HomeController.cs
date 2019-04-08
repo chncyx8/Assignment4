@@ -227,6 +227,7 @@ namespace API_Simple.Controllers
         public IActionResult PopulateSymbols()
         {
             // Retrieve the companies that were saved in the symbols method
+            String data = HttpContext.Session.GetString("companies");
             List<Company> companies = JsonConvert.DeserializeObject<List<Company>>(TempData["Companies"].ToString());
 
             foreach (Company company in companies)
@@ -244,45 +245,9 @@ namespace API_Simple.Controllers
             return View("Index", companies);
         }
 
-        /*public IActionResult PopulateFinancials()
-        {
-            // Retrieve the companies that were saved in the symbols method
-            List<Financials> financials = JsonConvert.DeserializeObject<List<Financials>>(TempData["Financials"].ToString());
-
-            foreach (Financials financial in financials)
-            {
-                //Database will give PK constraint violation error when trying to insert record with existing PK.
-                //So add company only if it doesnt exist, check existence using symbol (PK)
-                if (dbContext.Financials.Where(c => c.financialList.Equals(financial.financialList)).Count() == 0)
-                {
-                    dbContext.Financials.Add(financial);
-                }
-            }
-
-            dbContext.SaveChanges();
-            //ViewBag.dbSuccessComp = 1;
-            return View("Financials", financials);
         }
 
-        public IActionResult PopulateSIT()
-        {
-            // Retrieve the companies that were saved in the symbols method
-            List<ShortInterestList> shortInterestLists = JsonConvert.DeserializeObject<List<ShortInterestList>>(TempData["shortInterestList"].ToString());
-
-            foreach (ShortInterestList sit in SIT)
-            {
-                //Database will give PK constraint violation error when trying to insert record with existing PK.
-                //So add company only if it doesnt exist, check existence using symbol (PK)
-                if (dbContext.ShortInterestList.Where(c => c.totalRevenue.Equals(sit.ShortInterestList)).Count() == 0)
-                {
-                    dbContext.ShortInterestList.Add(sit);
-                }
-            }
-
-            dbContext.SaveChanges();
-            //ViewBag.dbSuccessComp = 1;
-            return View("Financials", financials);
-        }*/
+        
 
         public IActionResult Privacy()
         {
