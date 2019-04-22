@@ -41,7 +41,15 @@ namespace Assignment4.Migrations
                     b.Property<string>("symbol")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime>("date");
+
+                    b.Property<double>("iexID");
+
+                    b.Property<string>("isEnabled");
+
                     b.Property<string>("name");
+
+                    b.Property<string>("type");
 
                     b.HasKey("symbol");
 

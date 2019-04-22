@@ -2,9 +2,11 @@
     ViewData["Title"] = "Home Page";
 }
 
+<a asp-controller="Home" asp-action="AboutUs">About Us</a>
+
 @model IEnumerable<Assignment4.Models.EF_model.Company>
 
-<h2>Symbols</h2>
+<h2>Trading Information for Conmpanies</h2>
 <hr />
 
 <table class="table">
@@ -60,7 +62,11 @@
     </tbody>
 </table>
 
-<a asp-controller="Home" asp-action="AboutUs">About Us</a>
+<tr>
+    <td>
+        <a id="dbopt" asp-controller="Home" asp-action="PopulateSymbols">Save</a>
+    </td>
+</tr>
 
 
 

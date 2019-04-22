@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment4.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190408033857_InitialCreate")]
+    [Migration("20190408055135_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,7 +43,15 @@ namespace Assignment4.Migrations
                     b.Property<string>("symbol")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime>("date");
+
+                    b.Property<double>("iexID");
+
+                    b.Property<string>("isEnabled");
+
                     b.Property<string>("name");
+
+                    b.Property<string>("type");
 
                     b.HasKey("symbol");
 

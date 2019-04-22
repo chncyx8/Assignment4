@@ -13,7 +13,10 @@ namespace Assignment4.Models
             [Key]
             public string symbol { get; set; }
             public string name { get; set; }
-
+            public DateTime date { get; set; }
+            public string isEnabled { get; set; }
+            public string type { get; set; }
+            public double iexID { get; set; }
         }
 
         public class ShortInterestList

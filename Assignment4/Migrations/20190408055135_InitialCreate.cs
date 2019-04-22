@@ -27,7 +27,11 @@ namespace Assignment4.Migrations
                 columns: table => new
                 {
                     symbol = table.Column<string>(nullable: false),
-                    name = table.Column<string>(nullable: true)
+                    name = table.Column<string>(nullable: true),
+                    date = table.Column<DateTime>(nullable: false),
+                    isEnabled = table.Column<string>(nullable: true),
+                    type = table.Column<string>(nullable: true),
+                    iexID = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {

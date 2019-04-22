@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using static Assignment4.Models.EF_model;
 using Assignment4.Models;
 // ADD THESE DIRECTIVES
@@ -84,6 +85,8 @@ namespace API_Simple.Controllers
 
             //Save companies in TempData, so they do not have to be retrieved again
             TempData["Companies"] = JsonConvert.SerializeObject(companies);
+            String data = JsonConvert.SerializeObject(companies);
+            HttpContext.Session.SetString("companies", data);
 
             return View(companies);
         }
@@ -119,7 +122,6 @@ namespace API_Simple.Controllers
 
             //Save companies in TempData, so they do not have to be retrieved again
             TempData["shortInterestList"] = JsonConvert.SerializeObject(shortInterestLists);
-            //Console.WriteLine(divident);
             return View(shortInterestLists);
         }
 
@@ -154,7 +156,6 @@ namespace API_Simple.Controllers
 
             //Save companies in TempData, so they do not have to be retrieved again
             TempData["BookList"] = JsonConvert.SerializeObject(booklist);
-            //Console.WriteLine(divident);
             return View(booklist);
         }
 
@@ -227,8 +228,9 @@ namespace API_Simple.Controllers
         public IActionResult PopulateSymbols()
         {
             // Retrieve the companies that were saved in the symbols method
-            //String data = HttpContext.Session.GetType("companies");
-            List<Company> companies = JsonConvert.DeserializeObject<List<Company>>(TempData["Companies"].ToString());
+            String data = HttpContext.Session.GetString("companies");
+            List<Company> companies = JsonConvert.DeserializeObject<List<Company>>(data);
+                //(TempData["companies"].ToString());
 
             foreach (Company company in companies)
             {
