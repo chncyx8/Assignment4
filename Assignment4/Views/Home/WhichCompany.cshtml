@@ -1,26 +1,26 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Which Company";
 }
 
 @model IEnumerable<Assignment4.Models.EF_model.Company>
 
-<h2>Trading Information for Conmpanies</h2>
+<h2>Trading Information for Companies</h2>
 <hr />
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                Symbol
-            </th>
+            Symbol
+        </th>
+        <th>
+            Company Name
+        </th>
+        <th>
+            KeyStats
+        </th>
             <th>
-                Company Name
-            </th>
-            <th>
-                ShortInterestList
-            </th>
-            <th>
-                Book
+                Change
             </th>
             <th>
                 Dividend
@@ -37,17 +37,17 @@
         @foreach (var item in Model)
         {
         <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.symbol)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            <a asp-controller="Home" asp-route-id="@item.symbol" asp-action="KeyStats">KeyStats</a>
+        </td>
             <td>
-                @Html.DisplayFor(modelItem => item.symbol)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.name)
-            </td>
-            <td>
-                <a asp-controller="Home" asp-route-id="@item.symbol" asp-action="ShortInterestList">ShortInterestList</a>
-            </td>
-            <td>
-                <a asp-controller="Home" asp-route-id="@item.symbol" asp-action="Book">Book</a>
+                <a asp-controller="Home" asp-route-id="@item.symbol" asp-action="Chart">Chart</a>
             </td>
             <td>
                 <a asp-controller="Home" asp-route-id="@item.symbol" asp-action="Dividend">Dividend</a>
@@ -65,6 +65,3 @@
         <a id="dbopt" asp-controller="Home" asp-action="PopulateSymbols">Save</a>
     </td>
 </tr>
-
-
-

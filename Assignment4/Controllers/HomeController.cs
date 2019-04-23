@@ -73,6 +73,18 @@ namespace API_Simple.Controllers
             return View(companies);
         }
 
+        public IActionResult WhichCompany()
+        {
+            //Set ViewBag variable first
+            ViewBag.dbSuccessComp = 0;
+            List<Company> companies = GetSymbols();
+
+            //Save companies in TempData, so they do not have to be retrieved again
+            TempData["Companies"] = JsonConvert.SerializeObject(companies);
+
+            return View(companies);
+        }
+
         /*
             The Symbols action calls the GetSymbols method that returns a list of Companies.
             This list of Companies is passed to the Symbols View.
@@ -225,6 +237,77 @@ namespace API_Simple.Controllers
             return View(Price);
         }
 
+        public List<KeyStats> GetKeyStats(string symbol)
+        {
+
+            string IEXTrading_API_KeyStats = BASE_URL + "stock/" + symbol + "/stats";
+            string keystatList = "";
+            List<KeyStats> keystats = new List<KeyStats>();
+            httpClient.BaseAddress = new Uri(IEXTrading_API_KeyStats);
+
+            HttpResponseMessage respose = httpClient.GetAsync(IEXTrading_API_KeyStats).GetAwaiter().GetResult();
+
+            if (respose.IsSuccessStatusCode)
+            {
+                keystatList = respose.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            }
+            if (!keystatList.Equals(""))
+            {
+                keystats = JsonConvert.DeserializeObject<List<KeyStats>>(keystatList);
+                keystats.GetRange(0, keystats.Count);
+            }
+
+            return keystats;
+        }
+
+        public IActionResult KeyStats(string id)
+        {
+            String symbols = id;
+            //Set ViewBag variable first
+            ViewBag.dbSuccessComp = 0;
+            //List<KeyStats> KeyStats = GetKeyStats(symbols);
+            List<KeyStats> KeyStats = GetKeyStats(symbols);
+
+            //Save companies in TempData, so they do not have to be retrieved again
+            TempData["KeyStats"] = JsonConvert.SerializeObject(KeyStats);
+            return View(KeyStats);
+        }
+
+        public List<Chart> GetChart(string symbol)
+        {
+
+            string IEXTrading_API_Chart = BASE_URL + "stock/" + symbol + "/chart/5y";  ///stock/{symbol}/chart/{range}
+            string chartList = "";
+            List<Chart> charts = new List<Chart>();
+            httpClient.BaseAddress = new Uri(IEXTrading_API_Chart);
+
+            HttpResponseMessage respose = httpClient.GetAsync(IEXTrading_API_Chart).GetAwaiter().GetResult();
+
+            if (respose.IsSuccessStatusCode)
+            {
+                chartList = respose.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            }
+            if (!chartList.Equals(""))
+            {
+                charts = JsonConvert.DeserializeObject<List<Chart>>(chartList);
+                charts.GetRange(0, charts.Count);
+            }
+            return charts;
+        }
+        //[Route("{id}")]
+        public IActionResult Chart(string id)
+        {
+            String symbols = id;
+            //Set ViewBag variable first
+            ViewBag.dbSuccessComp = 0;
+            List<Chart> chart = GetChart(symbols);
+
+            //Save companies in TempData, so they do not have to be retrieved again
+            TempData["chart"] = JsonConvert.SerializeObject(chart);
+            return View(chart);
+        }
+
+
         public IActionResult PopulateSymbols()
         {
             // Retrieve the companies that were saved in the symbols method
@@ -260,6 +343,8 @@ namespace API_Simple.Controllers
             //ViewBag.Link = "<a href='" + github.com / chncyx8 / Assignment4 + "'>Github</a>";
             return View();
         }
+
+        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

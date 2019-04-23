@@ -66,5 +66,30 @@ namespace Assignment4.Models
             public double Amount { get; set; }
             public string Symbol { get; set; }
         }
+
+        public class KeyStats
+        {
+            [Key]
+            public float beta { get; set; }
+            public float returnOnEquity { get; set; }
+            public float dividendYield { get; set; }
+        }
+
+        public class Chart
+        {
+            [Key]
+            public DateTime date { get; set; }
+            public float open { get; set; }
+            public float high { get; set; }
+            public float low { get; set; }
+            public float volume { get; set; }
+            public float unadjustedClose { get; set; }
+            public float unadjustedVolume { get; set; }
+            public float change { get; set; }
+            public float changePercent { get; set; }
+            public float vwap { get; set; }
+            public string label { get; set; }
+            public float changeOverTime { get; set; }
+        }
     }
 }

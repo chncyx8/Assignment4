@@ -16,5 +16,7 @@ namespace Assignment4.DataAccess
         public DbSet<Dividend> Dividend { get; set; }
 
         public DbSet<Price> Price { get; set; }
+
+        public DbSet<Price> KeyStats { get; set; }
     }
 }

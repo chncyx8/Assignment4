@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Assignment4.Models.EF_model.KeyStats>
+
+@{
+    ViewData["Title"] = "KeyStats";
+}
+
+<h2>KeyStats</h2>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.beta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.returnOnEquity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dividendYield)
+            </th>           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.beta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.returnOnEquity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dividendYield)
+                </td>              
+                <td></td>
+            </tr>
+        }
+    </tbody>
+</table>
