@@ -4,20 +4,23 @@
     ViewData["Title"] = "Chart";
 }
 
-<h2>Chart</h2>
+<h2>Chart - Period of 5 Years</h2>
 
 
 <table class="table">
     <thead>
         <tr>
             <th>
+                Date
+            </th>
+            <th>
                 Change
             </th>
             <th>
-                changeOverTime
+                Change Over Time
             </th>
             <th>
-                changePercent
+                Change Percent
             </th>
             <th></th>
         </tr>
@@ -26,6 +29,9 @@
         @foreach (var item in Model)
         {
             <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.label)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.change)
                 </td>

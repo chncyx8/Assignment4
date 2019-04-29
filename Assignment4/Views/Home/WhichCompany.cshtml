@@ -4,7 +4,7 @@
 
 @model IEnumerable<Assignment4.Models.EF_model.Company>
 
-<h2>Trading Information for Companies</h2>
+<h2>Chart Information</h2>
 <hr />
 
 <table class="table">
@@ -16,19 +16,9 @@
         <th>
             Company Name
         </th>
-        <th>
-            KeyStats
-        </th>
             <th>
-                Change
+                Chart
             </th>
-            <th>
-                Dividend
-            </th>
-            <th>
-                Price
-            </th>
-
         </tr>
     </thead>
 
@@ -43,17 +33,8 @@
         <td>
             @Html.DisplayFor(modelItem => item.name)
         </td>
-        <td>
-            <a asp-controller="Home" asp-route-id="@item.symbol" asp-action="KeyStats">KeyStats</a>
-        </td>
             <td>
                 <a asp-controller="Home" asp-route-id="@item.symbol" asp-action="Chart">Chart</a>
-            </td>
-            <td>
-                <a asp-controller="Home" asp-route-id="@item.symbol" asp-action="Dividend">Dividend</a>
-            </td>
-            <td>
-                <a asp-controller="Home" asp-route-id="@item.symbol" asp-action="Price">Price</a>
             </td>
         </tr>
         }

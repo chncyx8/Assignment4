@@ -301,7 +301,7 @@ namespace API_Simple.Controllers
             //Set ViewBag variable first
             ViewBag.dbSuccessComp = 0;
             List<Chart> chart = GetChart(symbols);
-
+            
             //Save companies in TempData, so they do not have to be retrieved again
             TempData["chart"] = JsonConvert.SerializeObject(chart);
             return View(chart);

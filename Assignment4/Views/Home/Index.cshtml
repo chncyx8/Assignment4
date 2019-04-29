@@ -4,8 +4,11 @@
 
 @model IEnumerable<Assignment4.Models.EF_model.Company>
 
-<h2>Trading Information for Conmpanies</h2>
+<h2>Trading Information for Companies</h2>
 <hr />
+<link href="@Url.Content("~/Styles/Index.css")" rel="stylesheet" type="text/css" />
+
+@*@Styles.Render("~/Styles/Index.css")*@
 
 <table class="table">
     <thead>
@@ -17,7 +20,7 @@
                 Company Name
             </th>
             <th>
-                ShortInterestList
+                Short Interest List
             </th>
             <th>
                 Book
@@ -36,26 +39,26 @@
 
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.symbol)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.name)
-            </td>
-            <td>
-                <a asp-controller="Home" asp-route-id="@item.symbol" asp-action="ShortInterestList">ShortInterestList</a>
-            </td>
-            <td>
-                <a asp-controller="Home" asp-route-id="@item.symbol" asp-action="Book">Book</a>
-            </td>
-            <td>
-                <a asp-controller="Home" asp-route-id="@item.symbol" asp-action="Dividend">Dividend</a>
-            </td>
-            <td>
-                <a asp-controller="Home" asp-route-id="@item.symbol" asp-action="Price">Price</a>
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.symbol)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    <a asp-controller="Home" asp-route-id="@item.symbol" asp-action="ShortInterestList">ShortInterestList</a>
+                </td>
+                <td>
+                    <a asp-controller="Home" asp-route-id="@item.symbol" asp-action="Book">Book</a>
+                </td>
+                <td>
+                    <a asp-controller="Home" asp-route-id="@item.symbol" asp-action="Dividend">Dividend</a>
+                </td>
+                <td>
+                    <a asp-controller="Home" asp-route-id="@item.symbol" asp-action="Price">Price</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
@@ -65,6 +68,7 @@
         <a id="dbopt" asp-controller="Home" asp-action="PopulateSymbols">Save</a>
     </td>
 </tr>
+
 
 
 
